@@ -20,11 +20,11 @@ jobs:
           sudo apt install python3.9
           sudo apt install python3.9-dev python3.9-venv
 
-          cd src
           python3.9 -m venv lambda
           source lambda/bin/activate
           pip install -r requerimients.txt
           
+          cd src
           zip lambda.zip main.py
           mv lambda.zip Lib/site-packages/
           cd Lib/site-packages/
