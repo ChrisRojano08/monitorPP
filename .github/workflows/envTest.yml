@@ -18,6 +18,7 @@ jobs:
           sudo apt install software-properties-common
           sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt install python3.9
+          apt-get install python3.9-dev python3.9-venv
 
           python3.9 -m venv lambda
           source lambda/bin/activate
