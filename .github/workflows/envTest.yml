@@ -24,15 +24,19 @@ jobs:
           source lambda/bin/activate
           pip install -r requerimients.txt
           
-          cd src
           zip lambda.zip main.py
+          echo -------------
           ls
+          echo -------------
           cd lambda
           ls
+          echo -------------
           cd Lib
           ls
+          echo -------------
           cd site-packages
           ls
+          echo -------------
           mv lambda.zip lambda/Lib/site-packages/
           cd lambda/Lib/site-packages/
           listaArchivos=`ls`
