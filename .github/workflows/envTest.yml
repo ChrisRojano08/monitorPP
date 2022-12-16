@@ -26,6 +26,13 @@ jobs:
           
           cd src
           zip lambda.zip main.py
+          ls
+          cd lambda
+          ls
+          cd Lib
+          ls
+          cd site-packages
+          ls
           mv lambda.zip lambda/Lib/site-packages/
           cd lambda/Lib/site-packages/
           listaArchivos=`ls`
