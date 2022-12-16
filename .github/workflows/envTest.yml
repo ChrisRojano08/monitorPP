@@ -31,14 +31,12 @@ jobs:
           cd lambda
           ls
           echo -------------
-          cd Lib
+          cd lib
           ls
           echo -------------
           cd site-packages
           ls
           echo -------------
-          mv lambda.zip lambda/Lib/site-packages/
-          cd lambda/Lib/site-packages/
           listaArchivos=`ls`
           zip -r lambda.zip $listaArchivos
 
