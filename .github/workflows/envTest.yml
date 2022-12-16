@@ -26,8 +26,8 @@ jobs:
           
           cd src
           zip lambda.zip main.py
-          mv lambda.zip Lib/site-packages/
-          cd Lib/site-packages/
+          mv lambda.zip lambda/Lib/site-packages/
+          cd lambda/Lib/site-packages/
           listaArchivos=`ls`
           zip -r lambda.zip $listaArchivos
 
