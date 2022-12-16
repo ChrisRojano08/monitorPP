@@ -25,19 +25,8 @@ jobs:
           pip install -r requerimients.txt
           
           zip lambda.zip main.py
-          echo -------------
-          ls
-          echo -------------
-          cd lambda
-          ls
-          echo -------------
-          cd lib
-          ls
-          echo -------------
-          cd site-packages
-          ls
-          echo -------------
+          mv lambda.zip lambda/lib/python3.9/site-packages/
           listaArchivos=`ls`
           zip -r lambda.zip $listaArchivos
 
-          ls
+          ls -l
