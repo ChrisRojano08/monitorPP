@@ -1,0 +1,26 @@
+name: Deploy lambda
+
+on: 
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+  jobs:
+  deploy:
+    name: Deploy lambda
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Package
+        run: |
+          sudo apt update
+          sudo apt install software-properties-common
+          sudo add-apt-repository ppa:deadsnakes/ppa
+          sudo apt install python3.9
+
+          python3.9 -m venv lambda
+          source lambda/bin/activate
+          pip install -r requerimients.txt
+
+          ls
