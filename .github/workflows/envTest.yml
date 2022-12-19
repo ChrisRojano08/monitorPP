@@ -29,9 +29,10 @@ jobs:
           zip -r lambda.zip $listaArchivos
   
   deploy:
+    name: Send to lambda
     runs-on: ubuntu-latest
     steps:
-    - name: Send to lambda
+    - name: Setup lambda
     - uses: appleboy/lambda-action@v0.1.5
     - with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
