@@ -7,25 +7,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  package:
-    name: Deploy lambda
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.8' 
-    - name: Package
-      run: |
-          python -m pip install --upgrade pip
-          python -m venv lambda
-          source lambda/bin/activate
-          
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          
-          zip lambda.zip main.py
-          mv lambda.zip lambda/lib/python3.8/site-packages/
-          listaArchivos=`ls`
-          zip -r lambda.zip $listaArchivos
+    - uses: appleboy/lambda-action@v0.1.5
+    - name: Send to lambda
+    - with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_region: ${{ secrets.AWS_REGION }}
+        function_name: main
+        source: lambda.zip
   
   
