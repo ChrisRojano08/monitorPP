@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  package:
     name: Deploy lambda
     runs-on: ubuntu-latest
     steps:
@@ -29,14 +29,14 @@ jobs:
           zip -r lambda.zip $listaArchivos
   
   deploy:
-    name: Send to lambda
+    needs: [ package ]
     runs-on: ubuntu-latest
     steps:
-    - name: Setup lambda
+    - name: Send to lambda
     - uses: appleboy/lambda-action@v0.1.5
     - with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws_region: ${{ secrets.AWS_REGION }}
         function_name: main
-        source: put_objects_image_repo/Lib/site-packages/lambda.zip
+        source: lambda.zip
