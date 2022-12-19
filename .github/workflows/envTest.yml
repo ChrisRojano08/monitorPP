@@ -23,6 +23,11 @@ jobs:
           
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           
+          ls
+          cd lambda
+          echo ------------
+          ls
+          
           zip lambda.zip main.py
           mv lambda.zip lambda/lib/python3.9/site-packages/
           listaArchivos=`ls`
