@@ -5,9 +5,30 @@ on:
     branches: [ dev ]
 
   workflow_dispatch:
+jobs:  
+  package:
+    name: Deploy lambda
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.8' 
+    - name: Package
+      run: |
+          python -m pip install --upgrade pip
+          python -m venv lambda
+          source lambda/bin/activate
+          
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          
+          zip lambda.zip main.py
+          mv lambda.zip lambda/lib/python3.8/site-packages/
+          listaArchivos=`ls`
+          zip -r lambda.zip $listaArchivos
 
-jobs:
   deploy:
+    needs: [ package ]
     name: Deploy from file
     runs-on: ubuntu-latest
     steps:
