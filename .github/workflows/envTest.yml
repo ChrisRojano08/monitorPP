@@ -28,15 +28,4 @@ jobs:
           listaArchivos=`ls`
           zip -r lambda.zip $listaArchivos
   
-  deploy:
-    needs: [ package ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: appleboy/lambda-action@v0.1.5
-      - name: Send to lambda
-      - with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: main
-          source: lambda.zip
+  
