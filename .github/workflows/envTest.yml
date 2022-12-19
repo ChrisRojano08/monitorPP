@@ -10,19 +10,22 @@ jobs:
   deploy:
     name: Deploy lambda
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: '3.10'
     steps:
       - uses: actions/checkout@v3
-      - name: Package
+      - name: Set up Python ${{ python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ python-version }}
+      - name: Install dependencies
         run: |
-          sudo apt update
-          sudo apt install software-properties-common
-          sudo add-apt-repository ppa:deadsnakes/ppa
-          sudo apt install python3.9
-          sudo apt install python3.9-dev python3.9-venv
-
-          python3.9 -m venv lambda
+          python -m pip install --upgrade pip
+          python -m venv lambda
           source lambda/bin/activate
-          pip install -r requerimients.txt
+          
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           
           zip lambda.zip main.py
           mv lambda.zip lambda/lib/python3.9/site-packages/
